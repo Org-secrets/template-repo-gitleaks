@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "🔍 Verificando segredos com GitLeaks antes do push..."
+
+# Remover relatório antigo, se existir
+if [ -f gitleaks-report.json ]; then
+    rm gitleaks-report.json
+fi
+
+# Executar o GitLeaks e gerar o relatório corretamente no Windows
+gitleaks detect --source . --report-path ./gitleaks-report.json --no-color
+
+# Verificar o resultado do GitLeaks
+if [ $? -ne 0 ]; then
+    echo "❗ GitLeaks encontrou segredos. Push abortado."
+    echo "💾 Relatório gerado em: ./gitleaks-report.json"
+    exit 1
+fi
+
+echo "✅ Nenhum segredo encontrado. Push permitido."
+exit 0
