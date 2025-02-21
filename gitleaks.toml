@@ -1,0 +1,14 @@
+[[rules]]
+    description = "Detecta palavras relacionadas a senha (password)"
+    regex = '''(?:password|senha)\s*[:=]\s*\S+'''
+    tags = ["password", "secret"]
+
+[[rules]]
+    description = "Detecta a palavra 'password' em qualquer parte do código"
+    regex = '''password\s*=\s*\S+'''
+    tags = ["password", "secret"]
+
+[[rules]]
+    description = "Detecta a palavra 'senha' em qualquer parte do código"
+    regex = '''senha\s*=\s*\S+'''
+    tags = ["senha", "secret"]
